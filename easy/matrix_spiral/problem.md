@@ -11,7 +11,7 @@ For example, given the following matrix:
 </pre>
 
 You should print out the following:
-
+<pre>
 1
 2
 3
@@ -32,3 +32,4 @@ You should print out the following:
 14
 13
 12
+</pre>
