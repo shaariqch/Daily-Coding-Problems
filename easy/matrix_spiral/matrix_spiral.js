@@ -16,14 +16,16 @@ function matrixSpiral(mat) {
       arrSpiral.push(mat[rStart][i]);
     }
     rStart++;
+    if (rStart >= rFinish) break;
 
     for (let i = rStart; i < rFinish; i++) {
       arrSpiral.push(mat[i][cFinish - 1]);
     }
     cFinish--;
+    if (cStart >= cFinish) break;
 
     for (let i = cFinish - 1; i >= cStart; i--) {
-      arrSpiral.push(mat[cFinish - 1][i]);
+      arrSpiral.push(mat[rFinish - 1][i]);
     }
     rFinish--;
 
@@ -32,6 +34,7 @@ function matrixSpiral(mat) {
     }
     cStart++;
   }
+
   return arrSpiral;
 }
 
