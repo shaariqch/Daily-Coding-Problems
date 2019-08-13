@@ -22,13 +22,13 @@ function matrixSpiral(mat) {
     }
     cFinish--;
 
-    for (let i = cFinish - 1; i > cStart; i--) {
+    for (let i = cFinish - 1; i >= cStart; i--) {
       arrSpiral.push(mat[cFinish - 1][i]);
     }
     rFinish--;
 
-    for (let i = rFinish - 1; i > rStart; i--) {
-      arrSpiral.push(mat[cStart][i]);
+    for (let i = rFinish - 1; i >= rStart; i--) {
+      arrSpiral.push(mat[i][cStart]);
     }
     cStart++;
   }
