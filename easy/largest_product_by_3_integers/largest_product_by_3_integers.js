@@ -12,7 +12,7 @@ function largestProductBy3Integers(arr) {
     let productA = arr[i] * b * c;
     let productB = a * arr[i] * c;
     let productC = a * b * arr[i];
-    let maxProduct = Math.max(...arr);
+    let maxProduct = Math.max(productA, productB, productC);
 
     if (maxProduct > product) {
       switch (maxProduct) {
