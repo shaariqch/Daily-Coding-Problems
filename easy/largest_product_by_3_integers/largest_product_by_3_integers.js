@@ -3,6 +3,10 @@
  * @returns {number}
  */
 function largestProductBy3Integers(arr) {
+  if (arr.length < 3) {
+    throw 'Array needs to have at least 3 integers';
+  }
+
   let a = arr[0];
   let b = arr[1];
   let c = arr[2];
