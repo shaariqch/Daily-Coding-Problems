@@ -34,6 +34,5 @@ function largestProductBy3Integers(arr) {
 }
 
 /* Test */
-
 console.log(largestProductBy3Integers([-10, -10, 5, 2])); // 500
 console.log(largestProductBy3Integers([5, 8, 9, 0])); // 360
