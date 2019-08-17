@@ -19,18 +19,12 @@ function largestProductBy3Integers(arr) {
     let maxProduct = Math.max(productA, productB, productC);
 
     if (maxProduct > product) {
-      switch (maxProduct) {
-        case productA:
-          a = arr[i];
-          break;
-        case productB:
-          b = arr[i];
-          break;
-        case productC:
-          c = arr[i];
-          break;
-        default:
-          break;
+      if (maxProduct === productA) {
+        a = arr[i];
+      } else if (maxProduct === productB) {
+        b = arr[i];
+      } else if (maxProduct === productC) {
+        c = arr[i];
       }
     }
   }
