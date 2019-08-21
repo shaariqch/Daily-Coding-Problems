@@ -21,6 +21,7 @@ function removeFirstDistinctChar(s, k) {
 
 /**
  * @param {string} s
+ * @param {number} k
  * @returns {string}
  */
 function longestSubstringWithKDistinctChars(s, k) {
