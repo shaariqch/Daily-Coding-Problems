@@ -65,7 +65,7 @@ const tests = [
     res: 4,
   },
   {
-    desc: '3',
+    desc: '4',
     args: [[1, 2, 0, -4, 5]],
     res: 3,
   },
