@@ -3,19 +3,22 @@
  * @returns number
  */
 function trapping_rain_water(bars) {
-  let lastBar = bars[0];
-  let bucket = 0;
+  const left = [];
+  const right = [];
   let water = 0;
 
+  left[0] = bars[0];
   for (let i = 1; i < bars.length; i++) {
-    if (bars[i] < lastBar) {
-      bucket += lastBar - bars[i];
-    } else {
-      lastBar = bars[i];
-      water += bucket;
-      bucket = 0;
-    }
-    debugger;
+    left[i] = Math.max(left[i - 1], bars[i]);
+  }
+
+  right[bars.length - 1] = bars[bars.length - 1];
+  for (let i = bars.length - 2; i >= 0; i--) {
+    right[i] = Math.max(right[i + 1], bars[i]);
+  }
+
+  for (let i = 0; i < bars.length; i++) {
+    water += Math.min(left[i], right[i]) - bars[i];
   }
 
   return water;
