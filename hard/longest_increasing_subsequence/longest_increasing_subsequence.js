@@ -71,7 +71,7 @@ const tests = [
   },
 ];
 
-tests.forEach(test => {
+tests.forEach((test) => {
   const receivedResult = longest_increasing_subsequence_Length(...test.args);
   if (test.res === receivedResult) {
     console.log(`Pass: ${test.desc} | ${test.args.join(', ')} => ${test.res}`);
