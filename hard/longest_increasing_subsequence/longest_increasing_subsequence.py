@@ -1,6 +1,6 @@
 import json
 
-def longestIncreasingSubsequence(nums):
+def longest_increasing_subsequence(nums):
     """
     Returns length of longest increasing subsequence given an array of numbers.
     """
@@ -33,7 +33,7 @@ if __name__ == '__main__':
         testNumber = d['desc']
         args = d['args'][0]
         expected = d['res']
-        actual = longestIncreasingSubsequence(args)
+        actual = longest_increasing_subsequence(args)
         if not actual == expected:
             failedTests.append(testNumber)
         allTestsPass = actual == expected and allTestsPass
