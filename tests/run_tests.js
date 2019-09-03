@@ -78,6 +78,7 @@ fileScannerSync({
           tests[testPath].tests.forEach((test) => {
             totalTimeTaken += runTest(test, funcToBeTested);
           });
+          
           process.stdout.write(
             `\nTotal Time: ${totalTimeTaken}, Avg Time: ${totalTimeTaken /
               tests[testPath].tests.length}\n`,
