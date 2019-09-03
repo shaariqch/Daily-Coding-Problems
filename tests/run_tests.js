@@ -54,7 +54,7 @@ function runTest(test, func) {
   return timeInMilli;
 }
 
-let totalJSFiles = 0;
+let totalFilesTested = 0;
 let totalTestsRan = 0;
 
 fileScannerSync({
@@ -73,7 +73,7 @@ fileScannerSync({
         const testPath = path.join(path.dirname(fullPath), 'tests.json');
 
         if (fs.existsSync(testPath)) {
-          totalJSFiles++;
+          totalFilesTested++;
           const funcToBeTested = require(path.join('..' + path.sep, fullPath));
 
           if (!tests[testPath]) {
@@ -103,5 +103,5 @@ fileScannerSync({
   },
 });
 
-process.stdout.write(`Total files tested: ${totalJSFiles}\n`);
+process.stdout.write(`Total files tested: ${totalFilesTested}\n`);
 process.stdout.write(`Total tests ran: ${totalTestsRan}\n`);
