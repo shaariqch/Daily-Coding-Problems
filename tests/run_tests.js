@@ -39,12 +39,12 @@ function runTest(test, func) {
 
   if (test.exp === receivedResult) {
     process.stdout.write(
-      `Pass: ${test.desc} | ${test.args.join(', ')} => ${
+      `Test: ${test.desc} \u2713 | ${test.args.join(', ')} => ${
         test.exp
       } in ${timeInMilli} ms\n`,
     );
   } else {
-    process.stdout.write(`\nFail: ${test.desc}\n`);
+    process.stdout.write(`\nTest: ${test.desc} \u2717\n`);
     process.stdout.write(
       `expected: ${test.exp} | received: ${receivedResult}\n\n`,
     );
