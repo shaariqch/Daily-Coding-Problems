@@ -84,8 +84,8 @@ fileScannerSync({
           });
 
           process.stdout.write(
-            `\nTotal Time: ${totalTimeTaken}, Avg Time: ${totalTimeTaken /
-              tests[testPath].tests.length}\n`,
+            `\nTotal Time: ${totalTimeTaken} ms, Avg Time: ${totalTimeTaken /
+              tests[testPath].tests.length} ms\n`,
           );
 
           process.stdout.write(
