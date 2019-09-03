@@ -47,36 +47,4 @@ function longest_increasing_subsequence_Array(arr) {
   return lis.reduce((acc, val) => (acc.length >= val.length ? acc : val));
 }
 
-/* Test */
-const tests = [
-  {
-    desc: '1',
-    args: [[0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]],
-    res: 6,
-  },
-  {
-    desc: '2',
-    args: [[1, 2, 3, 4, 5]],
-    res: 5,
-  },
-  {
-    desc: '3',
-    args: [[1, 2, 0, 4, 5]],
-    res: 4,
-  },
-  {
-    desc: '4',
-    args: [[1, 2, 0, -4, 5]],
-    res: 3,
-  },
-];
-
-tests.forEach((test) => {
-  const receivedResult = longest_increasing_subsequence_Length(...test.args);
-  if (test.res === receivedResult) {
-    console.log(`Pass: ${test.desc} | ${test.args.join(', ')} => ${test.res}`);
-  } else {
-    console.log(`\nFail: ${test.desc}`);
-    console.log(`expected: ${test.res} | received: ${receivedResult}\n`);
-  }
-});
+module.exports = longest_increasing_subsequence_Length
