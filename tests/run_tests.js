@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const testSpecified = process.argv[2];
+
 function fileScannerSync(args) {
   if (!fs.statSync(args.dirPath).isDirectory()) {
     args.callback(args.dirPath, false);
@@ -61,7 +63,10 @@ fileScannerSync({
     const tests = [];
     let totalTimeTaken = 0;
     if (!isDir) {
-      if (path.extname(fullPath) === '.js') {
+      if (
+        path.extname(fullPath) === '.js' &&
+        (testSpecified === undefined || fullPath.indexOf(testSpecified) !== -1)
+      ) {
         const testPath = path.join(path.dirname(fullPath), 'tests.json');
 
         if (fs.existsSync(testPath)) {
@@ -78,7 +83,7 @@ fileScannerSync({
           tests[testPath].tests.forEach((test) => {
             totalTimeTaken += runTest(test, funcToBeTested);
           });
-          
+
           process.stdout.write(
             `\nTotal Time: ${totalTimeTaken}, Avg Time: ${totalTimeTaken /
               tests[testPath].tests.length}\n`,
