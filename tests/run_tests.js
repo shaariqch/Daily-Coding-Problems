@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-
 const testSpecified = process.argv[2];
 
 function fileScannerSync(args) {
