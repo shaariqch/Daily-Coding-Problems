@@ -47,4 +47,4 @@ function longest_increasing_subsequence_Array(arr) {
   return lis.reduce((acc, val) => (acc.length >= val.length ? acc : val));
 }
 
-module.exports = longest_increasing_subsequence_Length
+module.exports = longest_increasing_subsequence_Length;
