@@ -54,6 +54,9 @@ function runTest(test, func) {
   return timeInMilli;
 }
 
+let totalJSFiles = 0;
+let totalTestsRan = 0;
+
 fileScannerSync({
   dirPath: '.',
   recursive: true,
@@ -61,6 +64,7 @@ fileScannerSync({
   callback: (fullPath, isDir) => {
     const tests = [];
     let totalTimeTaken = 0;
+
     if (!isDir) {
       if (
         path.extname(fullPath) === '.js' &&
@@ -69,6 +73,7 @@ fileScannerSync({
         const testPath = path.join(path.dirname(fullPath), 'tests.json');
 
         if (fs.existsSync(testPath)) {
+          totalJSFiles++;
           const funcToBeTested = require(path.join('..' + path.sep, fullPath));
 
           if (!tests[testPath]) {
@@ -80,6 +85,7 @@ fileScannerSync({
           );
 
           tests[testPath].tests.forEach((test) => {
+            totalTestsRan++;
             totalTimeTaken += runTest(test, funcToBeTested);
           });
 
@@ -96,3 +102,6 @@ fileScannerSync({
     }
   },
 });
+
+process.stdout.write(`Total files tested: ${totalJSFiles}\n`);
+process.stdout.write(`Total tests ran: ${totalTestsRan}\n`);
