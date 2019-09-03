@@ -26,9 +26,15 @@ fileScannerSync({
   recursive: true,
   excludeList: ['tests'],
   callback: (fullPath, isDir) => {
+    const tests = [];
     if (!isDir) {
       if (path.extname(fullPath) === '.js') {
-        path.dirname(fullPath) + 'test.json';
+        const testPath = path.dirname(fullPath) + 'test.json';
+        if (!tests[testPath]) {
+          tests[testPath] = JSON.parse(fs.readFileSync(testPath, 'utf-8'));
+        }
+
+        
       }
     }
   },
