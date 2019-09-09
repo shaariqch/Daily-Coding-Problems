@@ -106,7 +106,6 @@ function runTest(test, func) {
   const timeInMilli = timeInNano / nanoPerMilli;
 
   result.timeTaken = timeInMilli;
-
   result.hasPassed = isEqual(test.exp, result.received);
 
   return result;
@@ -175,8 +174,7 @@ fileScannerSync({
 
           tests[testPath].tests.forEach((test) => {
             const testRes = runTest(test, funcToBeTested);
-
-            tSuite.tests.push({...test, ...testRes});
+            tSuite.tests.push(Object.assign(test, testRes));
 
             if (testRes.hasPassed) {
               totalTestsPassed++;
