@@ -1,0 +1,35 @@
+{
+  "title": "multiplication_table",
+  "tests": [
+    {
+      "desc": 1,
+      "args": [6, 12],
+      "exp": 4
+    },
+    {
+      "desc": 2,
+      "args": [4, 18],
+      "exp": 0
+    },
+    {
+      "desc": 3,
+      "args": [13, 13],
+      "exp": 2
+    },
+    {
+      "desc": 4,
+      "args": [12, 13],
+      "exp": 0
+    },
+    {
+      "desc": 5,
+      "args": [0, 13],
+      "exp": 0
+    },
+    {
+      "desc": 6,
+      "args": [0, 0],
+      "exp": 0
+    }
+  ]
+}
