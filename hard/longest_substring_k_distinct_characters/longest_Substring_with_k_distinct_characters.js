@@ -51,10 +51,4 @@ function longestSubstringWithKDistinctChars(s, k) {
   return currS.length >= lastS.length ? currS : lastS;
 }
 
-/* Test */
-console.log(longestSubstringWithKDistinctChars('abcba', 2)); // bcb
-console.log(longestSubstringWithKDistinctChars('aaabcba', 2)); // aaab
-console.log(longestSubstringWithKDistinctChars('aaabcba', 3)); // aaabcba
-console.log(longestSubstringWithKDistinctChars('bbbbzaaabcba', 3)); // bbbbzaaab
-console.log(longestSubstringWithKDistinctChars('ab', 3)); // ab
-console.log(longestSubstringWithKDistinctChars('ab', 1)); // b
+module.exports = longestSubstringWithKDistinctChars;

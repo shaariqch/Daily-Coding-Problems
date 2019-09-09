@@ -24,7 +24,4 @@ function trapping_rain_water(bars) {
   return water;
 }
 
-/* Test */
-console.log(trapping_rain_water([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])); // 6
-console.log(trapping_rain_water([2, 0, 2])); // 2
-console.log(trapping_rain_water([2])); // 0
+module.exports = trapping_rain_water;
