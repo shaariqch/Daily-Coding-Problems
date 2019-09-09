@@ -1,4 +1,4 @@
-name: test
+name: JavaScript_Tests
 
 on: [push]
 
