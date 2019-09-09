@@ -1,0 +1,45 @@
+{
+  "title": "decode_message",
+  "tests": [
+    {
+      "desc": 1,
+      "args": ["01"],
+      "exp": 0
+    },
+    {
+      "desc": 2,
+      "args": ["1"],
+      "exp": 1
+    },
+    {
+      "desc": 3,
+      "args": ["12"],
+      "exp": 2
+    },
+    {
+      "desc": 4,
+      "args": ["27"],
+      "exp": 1
+    },
+    {
+      "desc": 5,
+      "args": ["999"],
+      "exp": 1
+    },
+    {
+      "desc": 6,
+      "args": ["911"],
+      "exp": 2
+    },
+    {
+      "desc": 7,
+      "args": ["123"],
+      "exp": 3
+    },
+    {
+      "desc": 8,
+      "args": ["111"],
+      "exp": 3
+    }
+  ]
+}

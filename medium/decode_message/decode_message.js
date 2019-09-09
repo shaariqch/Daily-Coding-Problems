@@ -30,12 +30,4 @@ function getNDecodeWays(enMsg) {
   return countDecodeWays(enMsg);
 }
 
-/* Test */
-console.log(getNDecodeWays('01')); // 0
-console.log(getNDecodeWays('1')); // 1
-console.log(getNDecodeWays('12')); // 2
-console.log(getNDecodeWays('27')); // 1
-console.log(getNDecodeWays('999')); // 1
-console.log(getNDecodeWays('911')); // 2
-console.log(getNDecodeWays('123')); // 3
-console.log(getNDecodeWays('111')); // 3
+module.exports = countDecodeWays;
