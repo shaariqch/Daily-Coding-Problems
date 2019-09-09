@@ -128,8 +128,9 @@ function displayTestSuite(tSuite) {
     }
   });
 
+  const totalTime = tSuite.tests.reduce((a, b) => a + b.timeTaken, 0);
   process.stdout.write(
-    `\nTotal Time: ${tSuite.totalTime} ms, Avg Time: ${tSuite.totalTime /
+    `\nTotal Time: ${totalTime} ms, Avg Time: ${totalTime /
       tSuite.tests
         .length} ms\n_______________________________________________________________________________\n`,
   );
@@ -152,7 +153,6 @@ fileScannerSync({
       const tSuite = {
         fileName: '',
         funcName: '',
-        totalTime: 0,
         tests: [],
       };
 
@@ -173,12 +173,10 @@ fileScannerSync({
           tSuite.fileName = path.basename(relativePath);
           tSuite.funcName = funcToBeTested.name;
 
-          tSuite.totalTime = 0;
           tests[testPath].tests.forEach((test) => {
             const testRes = runTest(test, funcToBeTested);
 
             tSuite.tests.push({...test, ...testRes});
-            tSuite.totalTime += testRes.timeTaken;
 
             if (testRes.hasPassed) {
               totalTestsPassed++;
