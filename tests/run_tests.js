@@ -7,6 +7,10 @@ let totalFilesTested = 0;
 let totalTestsPassed = 0;
 let totalTestsFailed = 0;
 
+function escapeRegExp(s) {
+  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+
 function arrContains(list, val) {
   let isContains = false;
 
@@ -90,7 +94,7 @@ function runTest(test, func) {
 fileScannerSync({
   path: '.',
   recursive: true,
-  excludeList: [],
+  excludeList: ['tests','.git'],
   callback: (relativePath, isDir) => {
     const tests = [];
     let totalTimeTaken = 0;
