@@ -1,0 +1,40 @@
+{
+  "title": "longest_substring_k_distinct_characters",
+  "tests": [
+    {
+      "desc": 1,
+      "args": ["abcba", 2],
+      "exp": "bcb"
+    },
+    {
+      "desc": 2,
+      "args": ["aaabcba", 2],
+      "exp": "aaab"
+    },
+    {
+      "desc": 3,
+      "args": ["aaabcba", 3],
+      "exp": "aaabcba"
+    },
+    {
+      "desc": 4,
+      "args": ["bbbbzaaabcba", 3],
+      "exp": "bbbbzaaab"
+    },
+    {
+      "desc": 5,
+      "args": ["ab", 3],
+      "exp": "ab"
+    },
+    {
+      "desc": 6,
+      "args": ["ab", 2],
+      "exp": "ab"
+    },
+    {
+      "desc": 6,
+      "args": ["ab", 1],
+      "exp": "b"
+    }
+  ]
+}
