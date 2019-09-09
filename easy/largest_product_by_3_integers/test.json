@@ -1,0 +1,15 @@
+{
+  "title": "largest_product_by_3_integers",
+  "tests": [
+    {
+      "desc": 1,
+      "args": [[-10, -10, 5, 2]],
+      "exp": 500
+    },
+    {
+      "desc": 2,
+      "args": [[5, 8, 9, 0]],
+      "exp": 360
+    }
+  ]
+}
