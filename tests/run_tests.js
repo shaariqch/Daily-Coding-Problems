@@ -65,7 +65,7 @@ function fileScannerSync(args) {
   }
 }
 
-function isEquivalent(a, b) {
+function isObjectEquivalent(a, b) {
   var aProps = Object.getOwnPropertyNames(a);
   var bProps = Object.getOwnPropertyNames(b);
 
@@ -104,7 +104,7 @@ function runTest(test, func) {
   returnObj.timeTaken = timeInMilli;
 
   if (typeof test.exp === 'object') {
-    returnObj.hasPassed = isEquivalent(test.exp, returnObj.received);
+    returnObj.hasPassed = isObjectEquivalent(test.exp, returnObj.received);
   } else {
     returnObj.hasPassed = test.exp === returnObj.received;
   }
