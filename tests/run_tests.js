@@ -65,6 +65,25 @@ function fileScannerSync(args) {
   }
 }
 
+function isEquivalent(a, b) {
+  var aProps = Object.getOwnPropertyNames(a);
+  var bProps = Object.getOwnPropertyNames(b);
+
+  if (aProps.length != bProps.length) {
+    return false;
+  }
+
+  for (var i = 0; i < aProps.length; i++) {
+    var propName = aProps[i];
+
+    if (a[propName] !== b[propName]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function runTest(test, func) {
   const returnObj = {
     timeTaken: 0,
@@ -84,8 +103,10 @@ function runTest(test, func) {
 
   returnObj.timeTaken = timeInMilli;
 
-  if (test.exp === returnObj.received) {
-    returnObj.hasPassed = true;
+  if (typeof test.exp === 'object') {
+    returnObj.hasPassed = isEquivalent(test.exp, returnObj.received);
+  } else {
+    returnObj.hasPassed = test.exp === returnObj.received;
   }
 
   return returnObj;
@@ -94,7 +115,7 @@ function runTest(test, func) {
 fileScannerSync({
   path: '.',
   recursive: true,
-  excludeList: ['tests','.git'],
+  excludeList: ['tests', '.git'],
   callback: (relativePath, isDir) => {
     const tests = [];
     let totalTimeTaken = 0;
@@ -114,7 +135,9 @@ fileScannerSync({
             tests[testPath] = JSON.parse(fs.readFileSync(testPath, 'utf-8'));
           }
 
-          process.stdout.write(`\nTest: ${path.basename(relativePath)} => ${funcToBeTested.name}\n\n`);
+          process.stdout.write(
+            `\nTest: ${path.basename(relativePath)} => ${funcToBeTested.name}\n\n`,
+          );
 
           tests[testPath].tests.forEach((test) => {
             const testResObj = runTest(test, funcToBeTested);
