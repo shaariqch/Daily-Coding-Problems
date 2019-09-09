@@ -135,6 +135,13 @@ function displayTestSuite(tSuite) {
   );
 }
 
+function displayFinalStats(totalFilesTested, totalTestsPassed, totalTestsFailed) {
+  process.stdout.write(`\nTotal files tested: ${totalFilesTested}\n\n`);
+  process.stdout.write(`Total tests ran: ${totalTestsPassed + totalTestsFailed}\n`);
+  process.stdout.write(`Passed: ${totalTestsPassed}\n`);
+  process.stdout.write(`Failed: ${totalTestsFailed}\n`);
+}
+
 fileScannerSync({
   path: '.',
   recursive: true,
@@ -186,9 +193,6 @@ fileScannerSync({
   },
 });
 
-process.stdout.write(`\nTotal files tested: ${totalFilesTested}\n\n`);
-process.stdout.write(`Total tests ran: ${totalTestsPassed + totalTestsFailed}\n`);
-process.stdout.write(`Passed: ${totalTestsPassed}\n`);
-process.stdout.write(`Failed: ${totalTestsFailed}\n`);
+displayFinalStats(totalFilesTested, totalTestsPassed, totalTestsFailed);
 
 process.exit(totalTestsFailed);
