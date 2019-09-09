@@ -171,7 +171,7 @@ fileScannerSync({
   },
 });
 
-process.stdout.write(`Total files tested: ${totalFilesTested}\n\n`);
+process.stdout.write(`\nTotal files tested: ${totalFilesTested}\n\n`);
 process.stdout.write(`Total tests ran: ${totalTestsPassed + totalTestsFailed}\n`);
 process.stdout.write(`Passed: ${totalTestsPassed}\n`);
 process.stdout.write(`Failed: ${totalTestsFailed}\n`);
