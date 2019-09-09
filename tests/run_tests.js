@@ -104,7 +104,7 @@ fileScannerSync({
         path.extname(relativePath) === '.js' &&
         (testSpecified === undefined || relativePath.indexOf(testSpecified) !== -1)
       ) {
-        const testPath = path.join(path.dirname(relativePath), 'tests.json');
+        const testPath = path.join(path.dirname(relativePath), 'test.json');
 
         if (fs.existsSync(testPath)) {
           totalFilesTested++;
