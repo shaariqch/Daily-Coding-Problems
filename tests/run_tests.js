@@ -89,7 +89,7 @@ function isEqual(a, b) {
 }
 
 function runTest(test, func) {
-  const returnObj = {
+  const result = {
     timeTaken: 0,
     hasPassed: false,
     received: null,
@@ -99,17 +99,47 @@ function runTest(test, func) {
   const nanoPerMilli = 1000000;
   const timeStart = process.hrtime();
 
-  returnObj.received = func(...test.args);
+  result.received = func(...test.args);
 
   const timeStop = process.hrtime(timeStart);
   const timeInNano = timeStop[0] * nanoPerSec + timeStop[1];
   const timeInMilli = timeInNano / nanoPerMilli;
 
-  returnObj.timeTaken = timeInMilli;
+  result.timeTaken = timeInMilli;
+  result.hasPassed = isEqual(test.exp, result.received);
 
-  returnObj.hasPassed = isEqual(test.exp, returnObj.received);
+  return result;
+}
 
-  return returnObj;
+function displayTestSuite(tSuite) {
+  process.stdout.write(`\nTest: ${tSuite.fileName} => ${tSuite.funcName}\n\n`);
+  tSuite.tests.forEach((test) => {
+    if (test.hasPassed) {
+      process.stdout.write(
+        `Test: ${test.desc} \u2713 | ${test.args.join(', ')} => ${test.exp} in ${
+          test.timeTaken
+        } ms\n`,
+      );
+    } else {
+      process.stdout.write(
+        `\nTest: ${test.desc} \u2717 in ${test.timeTaken} ms\nexpected: ${test.exp} | received: ${test.received}\n\n`,
+      );
+    }
+  });
+
+  const totalTime = tSuite.tests.reduce((a, b) => a + b.timeTaken, 0);
+  process.stdout.write(
+    `\nTotal Time: ${totalTime} ms, Avg Time: ${totalTime /
+      tSuite.tests
+        .length} ms\n_______________________________________________________________________________\n`,
+  );
+}
+
+function displayFinalStats(totalFilesTested, totalTestsPassed, totalTestsFailed) {
+  process.stdout.write(`\nTotal files tested: ${totalFilesTested}\n\n`);
+  process.stdout.write(`Total tests ran: ${totalTestsPassed + totalTestsFailed}\n`);
+  process.stdout.write(`Passed: ${totalTestsPassed}\n`);
+  process.stdout.write(`Failed: ${totalTestsFailed}\n`);
 }
 
 fileScannerSync({
@@ -117,10 +147,14 @@ fileScannerSync({
   recursive: true,
   excludeList: ['tests', '.git'],
   callback: (relativePath, isDir) => {
-    const tests = [];
-    let totalTimeTaken = 0;
-
     if (!isDir) {
+      const tests = [];
+      const tSuite = {
+        fileName: '',
+        funcName: '',
+        tests: [],
+      };
+
       if (
         path.extname(relativePath) === '.js' &&
         (testSpecified === undefined || relativePath.indexOf(testSpecified) !== -1)
@@ -135,45 +169,26 @@ fileScannerSync({
             tests[testPath] = JSON.parse(fs.readFileSync(testPath, 'utf-8'));
           }
 
-          process.stdout.write(
-            `\nTest: ${path.basename(relativePath)} => ${funcToBeTested.name}\n\n`,
-          );
+          tSuite.fileName = path.basename(relativePath);
+          tSuite.funcName = funcToBeTested.name;
 
           tests[testPath].tests.forEach((test) => {
-            const testResObj = runTest(test, funcToBeTested);
-            totalTimeTaken += testResObj.timeTaken;
+            const testRes = runTest(test, funcToBeTested);
+            tSuite.tests.push(Object.assign(test, testRes));
 
-            if (testResObj.hasPassed) {
+            if (testRes.hasPassed) {
               totalTestsPassed++;
-              process.stdout.write(
-                `Test: ${test.desc} \u2713 | ${test.args.join(', ')} => ${test.exp} in ${
-                  testResObj.timeTaken
-                } ms\n`,
-              );
             } else {
               totalTestsFailed++;
-              process.stdout.write(`\nTest: ${test.desc} \u2717 in ${testResObj.timeTaken} ms\n`);
-              process.stdout.write(`expected: ${test.exp} | received: ${testResObj.received}\n\n`);
             }
           });
-
-          process.stdout.write(
-            `\nTotal Time: ${totalTimeTaken} ms, Avg Time: ${totalTimeTaken /
-              tests[testPath].tests.length} ms\n`,
-          );
-
-          process.stdout.write(
-            '_______________________________________________________________________________\n',
-          );
+          displayTestSuite(tSuite);
         }
       }
     }
   },
 });
 
-process.stdout.write(`\nTotal files tested: ${totalFilesTested}\n\n`);
-process.stdout.write(`Total tests ran: ${totalTestsPassed + totalTestsFailed}\n`);
-process.stdout.write(`Passed: ${totalTestsPassed}\n`);
-process.stdout.write(`Failed: ${totalTestsFailed}\n`);
+displayFinalStats(totalFilesTested, totalTestsPassed, totalTestsFailed);
 
 process.exit(totalTestsFailed);
