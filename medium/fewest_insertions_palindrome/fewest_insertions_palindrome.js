@@ -21,7 +21,6 @@ function longest_common_subsequence(s1, s2, i, j) {
 function longest_common_subsequenceDP(s1, s2) {
   let lcs = Array(s1.length + 1).fill(0);
   lcs = lcs.map(() => Array(s2.length + 1).fill(0));
-  let subString = '';
 
   for (let i = 0; i <= s1.length; i++) {
     for (let j = 0; j <= s2.length; j++) {
