@@ -27,7 +27,6 @@ function longest_common_subsequenceDP(s1, s2) {
       if (i === 0 || j === 0) {
         lcs[i][j] = 0;
       } else if (s1[i - 1] === s2[j - 1]) {
-        subString += s1[i - 1];
         lcs[i][j] = 1 + lcs[i - 1][j - 1];
       } else {
         lcs[i][j] = Math.max(lcs[i - 1][j], lcs[i][j - 1]);
